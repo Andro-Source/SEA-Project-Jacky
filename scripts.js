@@ -1,97 +1,206 @@
-/**
- * Data Catalog Project Starter Code - SEA Stage 2
- *
- * This file is where you should be doing most of your work. You should
- * also make changes to the HTML and CSS files, but we want you to prioritize
- * demonstrating your understanding of data structures, and you'll do that
- * with the JavaScript code you write in this file.
- *
- * The comments in this file are only to help you learn how the starter code
- * works. The instructions for the project are in the README. That said, here
- * are the three things you should do first to learn about the starter code:
- * - 1 - Change something small in index.html or style.css, then reload your
- *    browser and make sure you can see that change.
- * - 2 - On your browser, right click anywhere on the page and select
- *    "Inspect" to open the browser developer tools. Then, go to the "console"
- *    tab in the new window that opened up. This console is where you will see
- *    JavaScript errors and logs, which is extremely helpful for debugging.
- *    (These instructions assume you're using Chrome, opening developer tools
- *    may be different on other browsers. We suggest using Chrome.)
- * - 3 - Add another string to the titles array a few lines down. Reload your
- *    browser and observe what happens. You should see a fourth "card" appear
- *    with the string you added to the array, but a broken image.
- *
- */
-
-const FRESH_PRINCE_URL =
-  "https://upload.wikimedia.org/wikipedia/en/3/33/Fresh_Prince_S1_DVD.jpg";
-const CURB_POSTER_URL =
-  "https://m.media-amazon.com/images/M/MV5BZDY1ZGM4OGItMWMyNS00MDAyLWE2Y2MtZTFhMTU0MGI5ZDFlXkEyXkFqcGdeQXVyMDc5ODIzMw@@._V1_FMjpg_UX1000_.jpg";
-const EAST_LOS_HIGH_POSTER_URL =
-  "https://static.wikia.nocookie.net/hulu/images/6/64/East_Los_High.jpg";
-
-// This is an array of strings (TV show titles)
-let titles = [
-  "Fresh Prince of Bel Air",
-  "Curb Your Enthusiasm",
-  "East Los High",
+// This array stores the course data for the catalog.
+// Each object represents one UCSD CSE course.
+const courses = [
+  {
+    code: "CSE 8A",
+    courseNumber: 8,
+    title: "Introduction to Programming and Computational Problem Solving I",
+    units: 4,
+    description:
+      "Introduces basic programming concepts, problem solving, and software development using a high-level language.",
+  },
+  {
+    code: "CSE 8B",
+    courseNumber: 8,
+    title: "Introduction to Programming and Computational Problem Solving II",
+    units: 4,
+    description:
+      "Continues programming practice with a focus on larger programs, testing, and more advanced problem-solving techniques.",
+  },
+  {
+    code: "CSE 11",
+    courseNumber: 11,
+    title: "Accelerated Introduction to Programming",
+    units: 4,
+    description:
+      "Covers fundamental programming ideas at a faster pace for students with prior programming experience.",
+  },
+  {
+    code: "CSE 12",
+    courseNumber: 12,
+    title: "Basic Data Structures and Object-Oriented Design",
+    units: 4,
+    description:
+      "Introduces data structures, object-oriented design, and program organization for building larger software systems.",
+  },
+  {
+    code: "CSE 15L",
+    courseNumber: 15,
+    title: "Software Tools and Techniques Laboratory",
+    units: 2,
+    description:
+      "Provides hands-on practice with command-line tools, version control, testing, debugging, and basic software workflows.",
+  },
+  {
+    code: "CSE 20",
+    courseNumber: 20,
+    title: "Discrete Mathematics",
+    units: 4,
+    description:
+      "Studies logic, proof techniques, sets, functions, and combinatorics that support computer science theory.",
+  },
+  {
+    code: "CSE 21",
+    courseNumber: 21,
+    title: "Mathematics for Algorithms and Systems",
+    units: 4,
+    description:
+      "Covers mathematical tools such as induction, graphs, counting, and probability for analyzing algorithms and systems.",
+  },
+  {
+    code: "CSE 30",
+    courseNumber: 30,
+    title: "Computer Organization and Systems Programming",
+    units: 4,
+    description:
+      "Introduces machine-level programming, memory, data representation, and core ideas behind computer systems.",
+  },
+  {
+    code: "CSE 100",
+    courseNumber: 100,
+    title: "Advanced Data Structures",
+    units: 4,
+    description:
+      "Explores efficient data structures and algorithmic techniques for building fast and scalable software.",
+  },
+  {
+    code: "CSE 101",
+    courseNumber: 101,
+    title: "Design and Analysis of Algorithms",
+    units: 4,
+    description:
+      "Focuses on algorithm design strategies, correctness, and runtime analysis for solving computational problems.",
+  },
+  {
+    code: "CSE 105",
+    courseNumber: 105,
+    title: "Theory of Computability",
+    units: 4,
+    description:
+      "Examines automata, formal languages, computability, and the limits of what computers can solve.",
+  },
+  {
+    code: "CSE 110",
+    courseNumber: 110,
+    title: "Software Engineering",
+    units: 4,
+    description:
+      "Introduces team-based software development, design practices, testing, documentation, and project organization.",
+  },
+  {
+    code: "CSE 120",
+    courseNumber: 120,
+    title: "Principles of Computer Operating Systems",
+    units: 4,
+    description:
+      "Covers processes, threads, synchronization, memory management, and the design of operating systems.",
+  },
+  {
+    code: "CSE 130",
+    courseNumber: 130,
+    title: "Programming Languages: Principles and Paradigms",
+    units: 4,
+    description:
+      "Introduces core concepts in programming languages, including syntax, semantics, functional programming, and type systems.",
+  },
+  {
+    code: "CSE 140",
+    courseNumber: 140,
+    title: "Components and Design Techniques for Digital Systems",
+    units: 4,
+    description:
+      "Studies digital logic, combinational and sequential circuits, and design methods for computer hardware.",
+  },
+  {
+    code: "CSE 151A",
+    courseNumber: 151,
+    title: "Introduction to Machine Learning",
+    units: 4,
+    description:
+      "Introduces supervised learning, model evaluation, and practical machine learning methods for data-driven tasks.",
+  },
 ];
-// Your final submission should have much more data than this, and
-// you should use more than just an array of strings to store it all.
 
-// This function adds cards the page to display the data in the array
-function showCards() {
-  const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = "";
-  const templateCard = document.querySelector(".card");
+// These variables store references to the HTML elements we need to use.
+const searchInput = document.getElementById("search-input");
+const sortSelect = document.getElementById("sort-select");
+const courseList = document.getElementById("course-list");
+const resultsCount = document.getElementById("results-count");
 
-  for (let i = 0; i < titles.length; i++) {
-    let title = titles[i];
+// This function handles filtering, sorting, and rendering the courses.
+function renderCourses() {
+  const searchText = searchInput.value.toLowerCase().trim();
+  const sortOrder = sortSelect.value;
 
-    // This part of the code doesn't scale very well! After you add your
-    // own data, you'll need to do something totally different here.
-    let imageURL = "";
-    if (i == 0) {
-      imageURL = FRESH_PRINCE_URL;
-    } else if (i == 1) {
-      imageURL = CURB_POSTER_URL;
-    } else if (i == 2) {
-      imageURL = EAST_LOS_HIGH_POSTER_URL;
+  // Filter courses by course code or title.
+  const filteredCourses = courses.filter(function (course) {
+    const matchesCode = course.code.toLowerCase().includes(searchText);
+    const matchesTitle = course.title.toLowerCase().includes(searchText);
+    return matchesCode || matchesTitle;
+  });
+
+  // Sort courses by course number.
+  filteredCourses.sort(function (a, b) {
+    if (sortOrder === "desc") {
+      return b.courseNumber - a.courseNumber;
     }
 
-    const nextCard = templateCard.cloneNode(true); // Copy the template card
-    editCardContent(nextCard, title, imageURL); // Edit title and image
-    cardContainer.appendChild(nextCard); // Add new card to the container
+    return a.courseNumber - b.courseNumber;
+  });
+
+  // Clear the old course cards before adding new ones.
+  courseList.innerHTML = "";
+
+  // Show how many courses are currently displayed.
+  resultsCount.textContent = "Showing " + filteredCourses.length + " course(s)";
+
+  // If no courses match the search, show a simple message.
+  if (filteredCourses.length === 0) {
+    const emptyMessage = document.createElement("div");
+    emptyMessage.className = "empty-message";
+    emptyMessage.textContent = "No courses matched your search.";
+    courseList.appendChild(emptyMessage);
+    return;
   }
+
+  // Create and add a card for each course.
+  filteredCourses.forEach(function (course) {
+    const card = document.createElement("article");
+    card.className = "course-card";
+
+    const title = document.createElement("h2");
+    title.textContent = course.code + ": " + course.title;
+
+    const meta = document.createElement("div");
+    meta.className = "course-meta";
+    meta.textContent =
+      "Course Number: " + course.courseNumber + " | Units: " + course.units;
+
+    const description = document.createElement("p");
+    description.textContent = course.description;
+
+    card.appendChild(title);
+    card.appendChild(meta);
+    card.appendChild(description);
+    courseList.appendChild(card);
+  });
 }
 
-function editCardContent(card, newTitle, newImageURL) {
-  card.style.display = "block";
+// Re-render the list whenever the user types in the search bar.
+searchInput.addEventListener("input", renderCourses);
 
-  const cardHeader = card.querySelector("h2");
-  cardHeader.textContent = newTitle;
+// Re-render the list whenever the user changes the sort dropdown.
+sortSelect.addEventListener("change", renderCourses);
 
-  const cardImage = card.querySelector("img");
-  cardImage.src = newImageURL;
-  cardImage.alt = newTitle + " Poster";
-
-  // You can use console.log to help you debug!
-  // View the output by right clicking on your website,
-  // select "Inspect", then click on the "Console" tab
-  console.log("new card:", newTitle, "- html: ", card);
-}
-
-// This calls the addCards() function when the page is first loaded
-document.addEventListener("DOMContentLoaded", showCards);
-
-function quoteAlert() {
-  console.log("Button Clicked!");
-  alert(
-    "I guess I can kiss heaven goodbye, because it got to be a sin to look this good!",
-  );
-}
-
-function removeLastCard() {
-  titles.pop(); // Remove last item in titles array
-  showCards(); // Call showCards again to refresh
-}
+// Render the full course list when the page first loads.
+renderCourses();
